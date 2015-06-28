@@ -206,7 +206,6 @@ else
     vid.FrameRate = 20;
     open(vid)
     frameRate = .05; % seconds between frames
-    count = 1;
     for i=1:dataSize
         s=sprintf('./data/image_p/Panoramic_%d.jpg',jpgfile(i));
         img=imread(s);
@@ -229,11 +228,7 @@ else
            plot(y_(i,1),y_(i,2),'k:','LineWidth',2.5);
            plot(y_ekf(i,1),y_ekf(i,2),'b-.','LineWidth',2.5);
            if (obs_ix(i)==1)
-               if (count==1)
-                plot(y_est_test_sort(count,1),y_est_test_sort(count,2),'gs','LineWidth',2.5);
-                count = count + 1;
-               end
-           end
+           plot(y_est_test_sort(i,1),y_est_test_sort(i,2),'gs','LineWidth',2.5);
         else
            plot([y(i-1,1) y(i,1)],...
                 [y(i-1,2) y(i,2)],'r-','LineWidth',2.5);
@@ -241,16 +236,8 @@ else
                 [y_(i-1,2) y_(i,2)],'k:','LineWidth',2.5);
            plot([y_ekf(i-1,1) y_ekf(i,1)],...
                 [y_ekf(i-1,2) y_ekf(i,2)],'b-.','LineWidth',2.5);
-           if (obs_ix(i)==1)
-               if (count==1)
-                   plot(y_est_test_sort(count,1),y_est_test_sort(count,2),'gs','LineWidth',2.5);
-                   count = count + 1;
-               else
-                   plot([y_est_test_sort(count-1,1) y_est_test_sort(count,1)],...
-                        [y_est_test_sort(count-1,2) y_est_test_sort(count,2)],'gs','LineWidth',2.5);
-                   count = count + 1;
-               end
-           end
+           plot([y_est_test_sort(i-1,1) y_est_test_sort(i,1)],...
+                [y_est_test_sort(i-1,2) y_est_test_sort(i,2)],'gs','LineWidth',2.5);
         end
         hold off;
         title('trajectory');
