@@ -234,6 +234,8 @@ else
                 count = count + 1;
                end
            end
+           xlim([-2 2.5]);
+           ylim([-3 3]);
         else
            plot([y(i-1,1) y(i,1)],...
                 [y(i-1,2) y(i,2)],'r-','LineWidth',2.5);
@@ -251,6 +253,8 @@ else
                    count = count + 1;
                end
            end
+           xlim([-2 2.5]);
+           ylim([-3 3]);
         end
         hold off;
         title('trajectory');
