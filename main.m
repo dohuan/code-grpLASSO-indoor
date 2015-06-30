@@ -101,7 +101,6 @@ y_ekf(1,1) = y(1,1);
 y_ekf(1,2) = y(1,2);
 obv_count = 1;
 P_rec(:,:,1) = P;
-figure(1)
 
 square_error_ekf = 0;
 for i=2:dataSize
@@ -200,13 +199,14 @@ if (ifVideo == 0)
     ylabel('P_{[i,i]}','FontSize',18);
     box on
 else
-    filename='grpLASSO_indoor_animated.avi';
+    filename='grpLASSO_indoor_animated_1.avi';
     vid = VideoWriter(filename);
     vid.Quality = 100;
     vid.FrameRate = 20;
     open(vid)
     frameRate = .05; % seconds between frames
     count = 1;
+    figure('Color',[1 1 1]);
     for i=1:dataSize
         s=sprintf('./data/image_p/Panoramic_%d.jpg',jpgfile(i));
         img=imread(s);
@@ -216,13 +216,13 @@ else
         
         figure(1);
         movegui(figure(1),'northwest');
-        subplot(3,3,1);
+        subplot(2,4,1);
         imshow(img_gr);
         title('resized image')
-        subplot(3,3,4);
+        subplot(2,4,2);
         imshow(img_doughnut);
         title('doughnut image')
-        subplot(3,3,[2 3 5 6]);
+        subplot(2,4,[3 4]);
         hold on;
         if (i==1)
            plot(y(i,1),y(i,2),'r-','LineWidth',2.5);
@@ -256,9 +256,10 @@ else
            xlim([-2 2.5]);
            ylim([-3 3]);
         end
+        box on
         hold off;
         title('trajectory');
-        subplot(3,3,[7 8 9]);
+        subplot(2,4,[5 6 7 8]);
         imshow(img);
         title('panoramic image')
         
