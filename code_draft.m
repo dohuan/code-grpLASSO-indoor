@@ -67,7 +67,30 @@ for i=1:size(B_rec,1)
 	end
 end
 hold on
-for i=1:2:nf
+for i=1:3:nf
 	plot(lambda(2:end),B_rec(i,:),'Color',cm(col_code(i),:),'LineWidth',1.5);
 	plot(lambda(2:end),B_rec(i+30,:),'Color',cm(col_code(i),:),'LineWidth',1.5);
 end
+xlim([0.003 0.019]);
+xlabel('Lambda','FontSize',14);
+ylabel('Value of entries of matrix B','FontSize',14);
+set(gca,'FontSize',16);
+box on
+
+% --------------- Plot survival features
+bar(BOpt);
+xlim([0 200]);
+xlabel('Entries of the optimal matrix B','FontSize',14);
+ylabel('Values','FontSize',14);
+set(gca,'FontSize',16);
+
+% ------ Plot y_train and y_test
+load hpcc_run_0403(2)_OP_SURF
+hold on
+plot(y_train(:,1),y_train(:,2),'k:','LineWidth',2);
+plot(y_test(:,1),y_test(:,2),'k','LineWidth',2);
+hold off
+xlabel('(meters)','FontSize',14);
+ylabel('(meters)','FontSize',14);
+set(gca,'FontSize',16);
+box on
