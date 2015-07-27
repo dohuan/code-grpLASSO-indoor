@@ -78,11 +78,17 @@ set(gca,'FontSize',16);
 box on
 
 % --------------- Plot survival features
+for i =1:size(BOpt,1)
+	if (BOpt(i,1)<1e-2)
+		BOpt(i,1) = 0;
+	end
+end
 bar(BOpt);
 xlim([0 200]);
 xlabel('Entries of the optimal matrix B','FontSize',14);
 ylabel('Values','FontSize',14);
 set(gca,'FontSize',16);
+fprintf('Number of survived features: %d',(nnz(BOpt)));
 
 % ------ Plot y_train and y_test
 load hpcc_run_0403(2)_OP_SURF
@@ -94,3 +100,4 @@ xlabel('(meters)','FontSize',14);
 ylabel('(meters)','FontSize',14);
 set(gca,'FontSize',16);
 box on
+
