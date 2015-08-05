@@ -79,7 +79,7 @@ box on
 
 % --------------- Plot survival features
 for i =1:size(BOpt,1)
-	if (BOpt(i,1)<1e-2)
+	if (BOpt(i,1)<1e-3)
 		BOpt(i,1) = 0;
 	end
 end

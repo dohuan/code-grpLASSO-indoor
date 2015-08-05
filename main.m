@@ -4,7 +4,7 @@ close all
 %% Apply EKF to random-set result from GrpLasso
 % --- \sigma_e^2 = 0.265338 : Observation noise
 
-ifVideo = 1;
+ifVideo = 0;
 %load hpcc_grpLasso_0724149am
 load ./data/alien_0213
 % --- Load calibration matrix
