@@ -1,6 +1,7 @@
 clear
 clc
 close all
+tic
 %% Apply EKF to random-set result from GrpLasso
 % --- \sigma_e^2 = 0.265338 : Observation noise
 
@@ -50,6 +51,7 @@ for i=1:dataSize
     end
 end
 
+%tic
 phi = 0; % Heading angle
 y_(1,1) = y(1,1);
 y_(1,2) = y(1,2);
@@ -79,6 +81,8 @@ for i=2:dataSize
     y_(i,2)=((fTmp(2)/fTmp(3))-mu_y(2))/var_y(2);
     
 end
+% collapsed_time = toc;
+% fprintf('Collapsed time for open-loop: %f\n',collapsed_time);
 clear y_pre phi delta_y_w y_w
 % --- Initialize EKF
 %model_uncertainty = 0.7039; % RMSE of y and y_
@@ -172,11 +176,12 @@ if (ifVideo == 0)
 
     a = get(gca,'XTickLabel');
     set(gca,'XTickLabel',a,'fontsize',18);
-    xlabel('Y axis (meters)','FontSize',18);
-    ylabel('X axis (meters)','FontSize',18);
+    xlabel('(meters)','FontSize',18);
+    ylabel('(meters)','FontSize',18);
     grid on
     box on
-
+    legend('truth','open-loop','grpLASSO+EKF','grpLASSO');
+    
     figure(2)
     hold on
     line = 0:0.01:0.05;
@@ -268,5 +273,5 @@ else
     close(vid)
 end
 
-
+stopWatch = toc;
 
